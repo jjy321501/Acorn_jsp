@@ -19,6 +19,82 @@ public class UsersDao {
 		}
 		return dao;
 	}
+	//인자로 전달된 아이디에 해당하는 가입정보를 삭제해주는 메소드
+	public boolean delete(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int flag = 0;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 insert, update, delete 문 구성
+			String sql = "DELETE FROM users"
+					+ " WHERE id=?";
+			pstmt = conn.prepareStatement(sql);
+			//? 에 바인딩할 내용이 있으면 바인딩한다.
+			pstmt.setString(1, id);
+			flag = pstmt.executeUpdate(); //sql 문 실행하고 변화된 row 갯수 리턴 받기
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		if (flag > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	//인자로 전달된 아이디에 해당하는 가입정보를 리턴해주는 메소드
+	public UsersDto getData(String id) {
+		//회원정보를 담을 UsersDto
+		UsersDto dto=null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new DbcpBean().getConn();
+			//select 문 작성
+			String sql = "SELECT pwd, email, profile, regdate"
+					+ " FROM users"
+					+ " WHERE id=?";
+			pstmt = conn.prepareStatement(sql);
+			// ? 에 바인딩 할게 있으면 여기서 바인딩한다.
+			pstmt.setString(1, id);
+			//select 문 수행하고 ResultSet 받아오기
+			rs = pstmt.executeQuery();
+			//while문 혹은 if문에서 ResultSet 으로 부터 data 추출
+			if (rs.next()) {
+				dto=new UsersDto();
+				dto.setId(id);
+				dto.setPwd(rs.getString("pwd"));
+				dto.setEmail(rs.getString("email"));
+				dto.setProfile(rs.getString("profile"));
+				dto.setRegdate(rs.getString("regdate"));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return dto;
+	}
+	
 	//인자로 전달된 정보가 유효한 정보인지 여부를 리턴하는 메소드
 	public boolean isValid(UsersDto dto) {
 		//아이디 비밀번호가 유효한정보인지 변수 초기값

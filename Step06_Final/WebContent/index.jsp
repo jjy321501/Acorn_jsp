@@ -14,7 +14,7 @@
 	<div class="container">
 		<%if(id != null){ %>
 			<p>
-				<strong><%=id%></strong>님 로그인중..
+				<a href="users/private/info.jsp"><strong><%=id%></strong></a>님 로그인중..
 				<a href="users/logout.jsp">로그아웃</a>
 			</p>
 		<%}else{ %>
