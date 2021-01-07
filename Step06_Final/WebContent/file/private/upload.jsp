@@ -9,9 +9,9 @@
 	//Tomcat 서버를 실행했을때 WebContent/upload 폴더의 실제경로 얻어오기
 	String realPath=application.getRealPath("/upload");
 	System.out.println("realPath:"+realPath);
-	
+	//해당경로를 access 할수 있는 파일 객체 생성
 	File f=new File(realPath);
-	if(!f.exists()){
+	if(!f.exists()){//만일 폴더가 존재하지 않으면
 		f.mkdir();
 	}
 	//최대 업로드사이즈 설정
