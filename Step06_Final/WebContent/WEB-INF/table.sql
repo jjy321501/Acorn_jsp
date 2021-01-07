@@ -15,4 +15,14 @@ CREATE TABLE board_cafe(
 	viewCount NUMBER,
 	regdate DATE
 );
+--업로드된 파일의 정보를 저장할 테이블
+CREATE TABLE board_file(
+	num NUMBER PRIMARY KEY,
+	writer VARCHAR2(100) NOT NULL,
+	title VARCHAR2(100) NOT NULL,
+	orgFileName VARCHAR2(100) NOT NULL,--원본 파일명
+	savaFileName VARCHAR2(100) NOT NULL,--서버에 실제로 저장된 파일명
+	fileSize NUMBER NOT NULL,--파일의 크기
+	regdate DATE
+);
 

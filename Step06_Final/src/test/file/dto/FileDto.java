@@ -1,28 +1,30 @@
-package test.cafe.dto;
+package test.file.dto;
 
-public class CafeDto {
+public class FileDto {
 	private int num;
 	private String writer;
 	private String title;
-	private String content;
-	private int viewCount;
+	private String orgFileName;
+	private String saveFileName;
+	//파일의 크기는 byte 단위로 저장하기 때문에 long integer type 이 필요
+	private long fileSize;
 	private String regdate;
-	//페이징처리 필드
+	//페이징 필드
 	private int startRowNum;
 	private int endRowNum;
 	
-
 	//생성자
-	public CafeDto() {}
-	
-	public CafeDto(int num, String writer, String title, String content, int viewCount, String regdate, int startRowNum,
-			int endRowNum) {
+	public FileDto() {}
+
+	public FileDto(int num, String writer, String title, String orgFileName, String saveFileName, long fileSize,
+			String regdate, int startRowNum, int endRowNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
 		this.title = title;
-		this.content = content;
-		this.viewCount = viewCount;
+		this.orgFileName = orgFileName;
+		this.saveFileName = saveFileName;
+		this.fileSize = fileSize;
 		this.regdate = regdate;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
@@ -52,20 +54,28 @@ public class CafeDto {
 		this.title = title;
 	}
 
-	public String getContent() {
-		return content;
+	public String getOrgFileName() {
+		return orgFileName;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setOrgFileName(String orgFileName) {
+		this.orgFileName = orgFileName;
 	}
 
-	public int getViewCount() {
-		return viewCount;
+	public String getSaveFileName() {
+		return saveFileName;
 	}
 
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
+	public void setSaveFileName(String saveFileName) {
+		this.saveFileName = saveFileName;
+	}
+
+	public long getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
 	}
 
 	public String getRegdate() {
@@ -91,7 +101,6 @@ public class CafeDto {
 	public void setEndRowNum(int endRowNum) {
 		this.endRowNum = endRowNum;
 	}
-	
 	
 	
 }

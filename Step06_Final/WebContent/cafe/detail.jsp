@@ -14,14 +14,30 @@
 
 <!DOCTYPE html>
 <html>
+<jsp:include page="../include/resource.jsp"></jsp:include>
 <head>
 <meta charset="UTF-8">
 <title>/cafe/detail.jsp</title>
 </head>
 <body>
+<jsp:include page="../include/navbar.jsp">
+	<jsp:param value="cafe" name="thisPage"/>
+</jsp:include>
 <div class="container">
+	<nav>
+		<ul class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="${pageContext.request.contextPath }/">Home</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="${pageContext.request.contextPath}/cafe/list.jsp">글 목록</a>
+			</li>
+			<li class="breadcrumb-item active">상세보기</li>
+			
+		</ul>
+	</nav>
 	<h1>글 상세 페이지</h1>
-	<table>
+	<table class="table table-bordered">
 		<tr>
 			<th>번호</th>
 			<td><%=dto.getNum() %></td>
@@ -44,7 +60,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<textarea><%=dto.getContent() %></textarea>
+				<textarea class="form-control" disabled><%=dto.getContent() %></textarea>
 			</td>
 		</tr>
 	</table>
