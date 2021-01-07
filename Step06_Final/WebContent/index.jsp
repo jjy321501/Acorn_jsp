@@ -6,19 +6,19 @@
 %>
 <!DOCTYPE html>
 <html>
+<jsp:include page="include/resource.jsp"></jsp:include>
 <head>
 <meta charset="UTF-8">
 <title>/index.jsp</title>
 </head>
 <body>
+<jsp:include page="include/navbar.jsp"></jsp:include>
 	<div class="container">
 		<%if(id != null){ %>
 			<p>
 				<a href="users/private/info.jsp"><strong><%=id%></strong></a>님 로그인중..
 				<a href="users/logout.jsp">로그아웃</a>
 			</p>
-		<%}else{ %>
-			<p><a href="users/loginform.jsp">로그인하기</a></p>
 		<% }%>
 		<h1>인덱스 페이지입니다</h1>
 		<ul>

@@ -18,38 +18,105 @@ public class CafeDao {
 		}
 		return dao;
 	}
-	//인자로 전달되는 글번호를 이용해서 삭제하는 메소드
-	public boolean delete(int num) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		int flag = 0;
-		try {
-			conn = new DbcpBean().getConn();
-			//실행할 insert, update, delete 문 구성
-			String sql = "DELETE FROM board_cafe"
-					+ " WHERE num=?";
-			pstmt = conn.prepareStatement(sql);
-			//? 에 바인딩할 내용이 있으면 바인딩한다.
-			pstmt.setInt(1, num);
-			flag = pstmt.executeUpdate(); //sql 문 실행하고 변화된 row 갯수 리턴 받기
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+	//글 조회수를 올리는 메소드
+		public boolean addViewCount(int num) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			int flag = 0;
 			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
+				conn = new DbcpBean().getConn();
+				//실행할 insert, update, delete 문 구성
+				String sql = "UPDATE board_cafe"
+						+ " SET viewCount=viewCount+1"
+						+ " WHERE num=?";
+				pstmt = conn.prepareStatement(sql);
+				//? 에 바인딩할 내용이 있으면 바인딩한다.
+				pstmt.setInt(1, num);
+				flag = pstmt.executeUpdate(); //sql 문 실행하고 변화된 row 갯수 리턴 받기
 			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+				}
+			}
+			if (flag > 0) {
+				return true;
+			} else {
+				return false;
 			}
 		}
-		if (flag > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
+	//인자로 전달되는 글내용을 수정 반영하는 메소드
+		public boolean update(CafeDto dto) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			int flag = 0;
+			try {
+				conn = new DbcpBean().getConn();
+				//실행할 insert, update, delete 문 구성
+				String sql = "UPDATE board_cafe"
+						+ " SET title=?, content=?"
+						+ " WHERE num=?";
+				pstmt = conn.prepareStatement(sql);
+				//? 에 바인딩할 내용이 있으면 바인딩한다.
+				pstmt.setString(1, dto.getTitle());
+				pstmt.setString(2, dto.getContent());
+				pstmt.setInt(3, dto.getNum());
+				flag = pstmt.executeUpdate(); //sql 문 실행하고 변화된 row 갯수 리턴 받기
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+				}
+			}
+			if (flag > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	
+		//인자로 전달되는 글번호를 이용해서 삭제하는 메소드
+		public boolean delete(int num) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			int flag = 0;
+			try {
+				conn = new DbcpBean().getConn();
+				//실행할 insert, update, delete 문 구성
+				String sql = "DELETE FROM board_cafe"
+						+ " WHERE num=?";
+				pstmt = conn.prepareStatement(sql);
+				//? 에 바인딩할 내용이 있으면 바인딩한다.
+				pstmt.setInt(1, num);
+				flag = pstmt.executeUpdate(); //sql 문 실행하고 변화된 row 갯수 리턴 받기
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+				}
+			}
+			if (flag > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}	
 	//인자로 전달되는 글번호에 해당하는 글정보를 리턴하는 메소드
 	public CafeDto getData(int num) {
 		CafeDto dto=null;
