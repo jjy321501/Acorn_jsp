@@ -1,3 +1,6 @@
+<%@page import="java.io.File"%>
+<%@page import="test.file.dao.FileDao"%>
+<%@page import="test.file.dto.FileDto"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,6 +10,10 @@
 	String realPath=application.getRealPath("/upload");
 	System.out.println("realPath:"+realPath);
 	
+	File f=new File(realPath);
+	if(!f.exists()){
+		f.mkdir();
+	}
 	//최대 업로드사이즈 설정
 	int sizeLimit=1024*1024*50; //50 Mbyte
 	/*
@@ -33,6 +40,19 @@
 	System.out.println("orgFileName:"+orgFileName);
 	System.out.println("saveFileName:"+saveFileName);
 	System.out.println("fileSize:"+fileSize);
+	//작성자
+	String writer=(String)session.getAttribute("id");
+	//업로드된 파일의 정보를 FileDto 에 담고
+	FileDto dto=new FileDto();
+	dto.setWriter(writer);
+	dto.setTitle(title);
+	dto.setOrgFileName(orgFileName);
+	dto.setSaveFileName(saveFileName);
+	dto.setFileSize(fileSize);
+	//DB에저장
+	boolean isSuccess=FileDao.getInstance().insert(dto);
+	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -41,6 +61,16 @@
 <title>/file/private/upload.jsp</title>
 </head>
 <body>
-
+	<%if(isSuccess){ %>
+		<p>
+			<%=writer %>님이 업로드한 <%=orgFileName %>파일을 저장했습니다.
+			<a href="${pageContext.request.contextPath}/file/list.jsp">목록보기</a>
+		</p>
+	<%}else{ %>
+		<p>
+			업로드실패!
+			<a href="upload_from.jsp">다시시도</a>
+		</p>
+	<%} %>
 </body>
 </html>

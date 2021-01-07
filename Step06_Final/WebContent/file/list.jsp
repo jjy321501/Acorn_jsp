@@ -1,5 +1,12 @@
+
+<%@page import="test.file.dto.FileDto"%>
+<%@page import="test.file.dao.FileDao"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<FileDto> list=FileDao.getInstance().getList();
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +16,7 @@
 <body>
 <div class="container">
 	<a href="private/upload_form.jsp">업로드 하러가기</a>
-	<h1>자료실 목록입니다</h1>
+	<h1>자료실 목록 입니다.</h1>
 	<table>
 		<thead>
 			<tr>
@@ -22,7 +29,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			
+		<%for(FileDto tmp : list){%>
+			<tr>
+				<td><%=tmp.getNum() %></td>
+				<td><%=tmp.getWriter() %></td>
+				<td><%=tmp.getTitle() %></td>
+				<td><%=tmp.getOrgFileName() %></td>
+				<td><%=tmp.getFileSize() %></td>
+				<td><%=tmp.getRegdate() %></td>
+			</tr>
+		<%} %>
 		</tbody>
 	</table>
 </div>
