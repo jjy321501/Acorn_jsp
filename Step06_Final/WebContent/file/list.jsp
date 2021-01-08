@@ -6,6 +6,9 @@
     pageEncoding="UTF-8"%>
 <%
 	List<FileDto> list=FileDao.getInstance().getList();
+	//로그인된 아이디가 있는지 읽어와본다(로그인을 하지 않았다면 null이다)
+	String  id=(String)session.getAttribute("id");
+	
 %>    
 <!DOCTYPE html>
 <html>
@@ -26,6 +29,7 @@
 				<th>파일명</th>
 				<th>크기</th>
 				<th>등록일</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,6 +41,11 @@
 				<td><a href="download.jsp?num=<%=tmp.getNum()%>"><%=tmp.getOrgFileName() %></a></td>
 				<td><%=tmp.getFileSize() %></td>
 				<td><%=tmp.getRegdate() %></td>
+				<%if(tmp.getWriter().equals(id)){ %>
+					<td><a href="private/delete.jsp?num=<%=tmp.getNum()%>">삭제</a></td>
+				<%}else{ %>
+				
+				<%} %>
 			</tr>
 		<%} %>
 		</tbody>
