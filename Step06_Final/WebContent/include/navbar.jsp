@@ -17,7 +17,7 @@
  		thisPage="";
  	}
  %>
-<nav class="navbar navbar-dark bg-primary navbar-expand-sm fixed-top">
+ <nav class="navbar navbar-dark bg-primary navbar-expand-sm fixed-top">
 	<div class="container">
 	  	<a class="navbar-brand" href="${pageContext.request.contextPath }/">
 	  		<img style="width:30px;height:30px" src="${pageContext.request.contextPath }/images/kim1.png"/> Acorn
@@ -32,6 +32,9 @@
 				</li>
 				<li class="nav-item <%=thisPage.equals("file") ? "active" : "" %>">
 					<a class="nav-link" href="${pageContext.request.contextPath }/file/list.jsp">자료실</a>
+				</li>
+				<li class="nav-item <%=thisPage.equals("gallery") ? "active" : "" %>">
+					<a class="nav-link" href="${pageContext.request.contextPath }/gallery/list.jsp">겔러리</a>
 				</li>
 			</ul>
 			<%
@@ -52,4 +55,5 @@
 		</div>
 	</div>
 </nav>
+
 
