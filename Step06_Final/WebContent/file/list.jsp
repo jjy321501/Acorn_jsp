@@ -105,7 +105,8 @@
 	<jsp:param value="file" name="thisPage"/>
 </jsp:include>
 <div class="container">
-	<a href="private/upload_form.jsp">업로드 하러가기</a>
+	<a href="private/upload_form.jsp">업로드 하러가기</a><br />
+	<a href="private/ajax_form.jsp">업로드 하러가기2</a>
 	<h1>자료실 목록 입니다.</h1>
 	<nav>
 		<ul class="breadcrumb">
@@ -179,16 +180,23 @@
 			<%} %>
 		</ul>
 	</nav>
+	
 	<form action="list.jsp" method="get">
 		<label for="condition">검색조건</label>
 		<select name="condition" id="condition">
-			<option value="title_filename">제목+파일명</option>
-			<option value="title">제목</option>
-			<option value="writer">작성자</option>
+			<option value="title_filename"<%=condition.equals("title_filename") ? "selected" : "" %>>제목+파일명</option>
+			<option value="title"<%=condition.equals("title") ? "selected" : "" %>>제목</option>
+			<option value="writer"<%=condition.equals("writer") ? "selected" : "" %>>작성자</option>
 		</select>
 		<input type="text" name="keyword" placeholder="검색어.." value="<%=keyword %>" />
 		<button type="submit">검색</button>
 	</form>
+	<%--만일 검색 키워드가 존재한다면 몇개의 글이 검색 되었는지 알려준다 --%>
+	<%if(!keyword.equals("")){ %>
+		<div class="alert alert-success">
+			<strong><%=totalRow %></strong>개의 자료가 검색 되었습니다
+		</div>
+	<%} %>
 </div>
 <script>
 	function deleteConfirm(num){

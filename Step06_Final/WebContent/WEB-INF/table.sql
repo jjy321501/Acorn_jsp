@@ -25,4 +25,14 @@ CREATE TABLE board_file(
 	fileSize NUMBER NOT NULL,--파일의 크기
 	regdate DATE
 );
+--사진갤러리
+CREATE TABLE board_gallery(
+	num NUMBER PRIMARY KEY,
+	writer VARCHAR2(100),
+	caption VARCHAR2(100),
+	imagePath VARCHAR2(100),
+	regdate DATE
+);
+
+
 
