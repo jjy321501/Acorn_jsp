@@ -1,4 +1,3 @@
-  
 <%@page import="test.gallery.dto.GalleryDto"%>
 <%@page import="test.gallery.dao.GalleryDao"%>
 <%@page import="java.util.List"%>
@@ -148,7 +147,7 @@
 	</nav>	
 </div>
 <script>
-	// card 이미지의 부모 요소를 선택해서 imgLiquid  동작(jquery plugin 동작) 하기 
+	//card 이미지의 부모 요소를 선택해서 imgLiquid  동작(jquery plugin 동작) 하기 
 	$(".img-wrapper").imgLiquid();
 </script>
 </body>
