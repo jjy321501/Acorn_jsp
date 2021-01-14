@@ -25,8 +25,8 @@
 </head>
 <body>
 	<%if(isSuccess){ %>
-		<script>
-			alert("수정 했습니다");
+		<script>다");
+			alert("수정 했습니
 			location.href="${pageContext.request.contextPath}/cafe/detail.jsp?num=<%=num%>";
 		</script>
 	<%}else{ %>

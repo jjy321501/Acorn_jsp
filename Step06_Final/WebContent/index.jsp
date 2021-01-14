@@ -31,6 +31,7 @@
 		<li><a href="file/list.jsp">자료실 목록보기</a></li>
 		<li><a href="gallery/list.jsp">갤러리 목록보기</a></li>
 	</ul>
+	
 </div>
 </body>
 </html>

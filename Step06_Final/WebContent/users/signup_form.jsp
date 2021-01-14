@@ -31,6 +31,7 @@
 		<div class="form-group">
 			<label for="email">이메일</label>
 			<input class="form-control" type="email" name="email" id="email"/>
+			<div class="invalid-feedback">형식이 달라요</div>
 		</div>
 		<button class="btn btn-outline-primary" type="submit">가입</button>
 	</form>
