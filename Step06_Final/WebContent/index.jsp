@@ -12,12 +12,11 @@
 <jsp:include page="include/resource.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="include/navbar.jsp">
-	<jsp:param value="gallery" name="thisPage"/>
-</jsp:include>
+<jsp:include page="include/navbar.jsp"></jsp:include>
 <div class="container">
 	<%-- 만일 id 가 null 이 아니면 로그인을 한 상태이다. --%>
 	<%if(id != null){ %>
+	
 		<p> 
 			<a href="users/private/info.jsp"><%=id %></a> 님 로그인중...
 			<a href="users/logout.jsp">로그아웃</a>
@@ -31,6 +30,7 @@
 		<li><a href="file/list.jsp">자료실 목록보기</a></li>
 		<li><a href="gallery/list.jsp">갤러리 목록보기</a></li>
 		<li><a href="file/list2">자료실 목록보기(MVC패턴)</a></li>
+		<li><a href="test/error_test.jsp">500 오류나는 페이지</a></li>
 	</ul>
 	
 </div>
